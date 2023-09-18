@@ -1,10 +1,152 @@
 <!DOCTYPE html>
 <html lang="en-US">
 
-<head><script src="https://localhost:49506/8ee4ea609a6346c4cf34c2b621ac79ba.js"></script>
-
+<head>
     <title>Invitation Page</title>
-    <link rel="stylesheet" type="text/css" href="css/IT-FP3215main.css" />
+<style>
+    body {
+    font: 15px arial, sans-serif;
+    color: #808080;
+}
+input[type=text],
+select ,input[type=password],radio{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+input[type=submit] {
+    width: 100%;
+    background-color: #800D1E;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+input[type=submit]:hover {
+    background-color: #802F1E;
+}
+section {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+article {
+    border-radius: 5px;
+    background-color: #CCCCCC;
+    padding: 20px;
+    color: #222222;
+}
+ul.topnav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+ul.topnav li {
+    float: left;
+}
+ul.topnav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+ul.topnav li a:hover:not(.active) {
+    background-color: #111;
+}
+ul.topnav li a.active {
+    background-color: #CCCCCC;
+    color: #333
+}
+ul.topnav li.right {
+    float: right;
+}
+@media screen and (max-width: 600px) {
+    ul.topnav li.right,
+    ul.topnav li {
+        float: none;
+    }
+}
+.top {
+    position: relative;
+    background-color: #ffffff;
+    height: 68px;
+    padding-top: 20px;
+    line-height: 50px;
+    overflow: hidden;
+    z-index: 2;
+}
+.logo {
+    font-family: arial;
+    text-decoration: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 37px;
+    letter-spacing: 3px;
+    color: #555555;
+    display: block;
+    position: absolute;
+    top: 17px;
+}
+.logo .dotcom {
+    color: #800D1E
+}
+.topnav {
+    position: relative;
+    z-index: 2;
+    font-size: 17px;
+    background-color: #5f5f5f;
+    color: #f1f1f1;
+    width: 100%;
+    padding: 0;
+    letter-spacing: 1px;
+}
+.top .logo {
+    position: relative;
+    top: 0;
+    width: 100%;
+    text-align: left;
+    margin: auto
+}
+footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    background-color: #efefef;
+    text-align: center;
+}
+div.gallery {
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 180px;
+}
+
+div.gallery:hover {
+    border: 1px solid #777;
+}
+
+div.gallery img {
+    width: 100%;
+    height: auto;
+}
+
+div.desc {
+    padding: 15px;
+    text-align: center;
+}
+</style>
 
 </head>
 
@@ -29,16 +171,23 @@
     </header>
     <section id="pageForm">
 
+<!-- when the users select submit, the form will run the function to replace the values in the placeholder content and stop form refresh -->
+
         <form action="#">
 
+<!-- aded numeric input field for the number of volunteers -->
             <label for="numericVolunteers">Number of Volunteers:
             </label>
             <br>
 
             <input type="text" id="nVolunteers" onkeydown="newFields()" name="numericVolunteers" placeholder="Number of Volunteers"/>
             <br>
+
+<!-- div that will allow volunteers to input their names -->
             
             <div id="countFields"></div>
+            
+<!-- adding unique name id's to the input tags in order call the element -->
 
             <label for="organizationName">Organization name:
             </label>           
@@ -50,14 +199,23 @@
 
             <label for="websiteURL">URL:
             </label>
-            <input type="text" id="wURL" name="websiteURL" placeholder="Enter your Website URL" />
+            <input type="text" name="websiteURL" id="wURL" placeholder="Enter your Website URL" />
 
             <label for="hostName">Host name:
             </label>
             <input type="text" id="hName" name="hostName" placeholder="Host Name" />
             <br>
 
-            <input type="Submit" id="btn" value="Submit" onclick="return getInfo()">
+<!-- when the users select submit, the form will run the function to replace the values in the placeholder -->
+
+            <input style="width: 100%;
+            background-color: #800D1E;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;" type="button" value="Submit">
         </form>
 
 
@@ -67,15 +225,31 @@
 
     </section>
 <script>
-    var rName,
+    // declaring the variable names to be called in the functions
+var rName,
   oName,
   wURL,
   hName,
-  edate,
+  date,
   volunteers,
   vCount,
   nMessage,
-  vId;
+  vId,
+  indexImages,
+  bannerImg,
+  pause,
+  imgs,
+  characterFormat,
+  nameFormat,
+  phoneNumberFormat,
+  passwordVerify,
+  username,
+  password,
+  firstName,
+  lastName,
+  emailAddress,
+  phoneNumber, 
+  newsletterSignUp;
 
 // function that will create the invitation message for each volunteer
 function getInfo() {
@@ -85,7 +259,7 @@ function getInfo() {
     vId = "vForm" + i;
 
     // getting the input value name that matches the id field
-    rName = document.getElementById(vId).value;
+    rName = document.getElementById("vId").value;
     oName = document.getElementById("oName").value;
     date = document.getElementById("date").value;
     wURL = document.getElementById("wURL").value;
@@ -126,15 +300,16 @@ function newFields() {
     }
     document.getElementById("countFields").innerHTML = nMessage;
   }
-
 }
+
+btn.addEventListener('click', getInfo);   
 </script>
+
     <footer>This events site is for IT-FP3215 tasks.
     </footer>
+
 
 </body>
 
 
 </html>
-
-
