@@ -3,150 +3,7 @@
 
 <head>
     <title>Invitation Page</title>
-    <style type="text/css">
-                body {
-    font: 15px arial, sans-serif;
-    color: #808080;
-}
-input[type=text],
-select ,input[type=password],radio{
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-input[type=submit] {
-    width: 100%;
-    background-color: #800D1E;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-input[type=submit]:hover {
-    background-color: #802F1E;
-}
-section {
-    border-radius: 5px;
-    background-color: #f2f2f2;
-    padding: 20px;
-}
-article {
-    border-radius: 5px;
-    background-color: #CCCCCC;
-    padding: 20px;
-    color: #222222;
-}
-ul.topnav {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-}
-ul.topnav li {
-    float: left;
-}
-ul.topnav li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-ul.topnav li a:hover:not(.active) {
-    background-color: #111;
-}
-ul.topnav li a.active {
-    background-color: #CCCCCC;
-    color: #333
-}
-ul.topnav li.right {
-    float: right;
-}
-@media screen and (max-width: 600px) {
-    ul.topnav li.right,
-    ul.topnav li {
-        float: none;
-    }
-}
-.top {
-    position: relative;
-    background-color: #ffffff;
-    height: 68px;
-    padding-top: 20px;
-    line-height: 50px;
-    overflow: hidden;
-    z-index: 2;
-}
-.logo {
-    font-family: arial;
-    text-decoration: none;
-    line-height: 1;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-size: 37px;
-    letter-spacing: 3px;
-    color: #555555;
-    display: block;
-    position: absolute;
-    top: 17px;
-}
-.logo .dotcom {
-    color: #800D1E
-}
-.topnav {
-    position: relative;
-    z-index: 2;
-    font-size: 17px;
-    background-color: #5f5f5f;
-    color: #f1f1f1;
-    width: 100%;
-    padding: 0;
-    letter-spacing: 1px;
-}
-.top .logo {
-    position: relative;
-    top: 0;
-    width: 100%;
-    text-align: left;
-    margin: auto
-}
-footer {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    padding: 1rem;
-    background-color: #efefef;
-    text-align: center;
-}
-div.gallery {
-    margin: 5px;
-    border: 1px solid #ccc;
-    float: left;
-    width: 180px;
-}
-
-div.gallery:hover {
-    border: 1px solid #777;
-}
-
-div.gallery img {
-    width: 100%;
-    height: auto;
-}
-
-div.desc {
-    padding: 15px;
-    text-align: center;
-}
-    </style>
+    <link rel="stylesheet" type="text/css" href="css/IT-FP3215%20main.css">
 </head>
 
 <body>
@@ -168,66 +25,91 @@ div.desc {
 
         </nav>
     </header>
-    <section id="pageForm">
-        <form action="#">
-            <label for="recipientName">Recipient name:</label>
-            <input type="text" id="recipientName" placeholder="Enter your Recipient Name" />
-
-            <label for="organizationName">Organization name:
-            </label>
-            <input type="text" id="organizationName" placeholder="Enter your Organization Name" />
-
-            <label for="eventDate">Event Date:
-            </label>
-            <input type="text" id="eventDate" placeholder="Enter your Event Date" />
-
-            <label for="websiteURL">URL:
-            </label>
-            <input type="text" id="websiteURL" placeholder="Enter your Website URL" />
-
-            <label for="hostName">Host name:
-            </label>
-            <input type="text" id="hostName" placeholder="Host Name" />
-
-            <input type="submit" id="btn" value="Submit">
-        </form>
-              
-    </section>
-
+    <br>
+    <br>
+    <form>
+    <input type="number" name="numberOfVolunteers" placeholder="Enter your Number of Volunteers" />
+    <button type="button" value="Submit" onclick="writeDataToSection();">Enter</button>
+    </form>
+    <section id="pageForm"><h1>Volunteer Invitiation</h1></section>
+    <input type="submit" value="Submit" onclick="replaceContent();return false;">
+    
     <article id="placeholderContent">
-        Hello <span id="recipientName1">recipientName</span>!
+        Hello <span id="recipientNamePlacehold">recipientName</div>,
         <br/>
-        <br/> You have been invited to volunteer for an event held by <span id="organizationName1">organizationName</span> on <span id="eventDate1">eventDate</span>. Please come to the following website: <span id="websiteURL1">websiteURL</span> to sign up as a volunteer.
+        <br/> You have been invited to volunteer for an event held by <span id="organizationNamePlaceholder">organizationName</div> on <span id="eventDatePlaceholder">eventDate</div>. Please come to the following website: <span id="websiteURLPlaceholder">websiteURL</div> to sign up as a volunteer.
         <br/>
         <br/> Thanks!
         <br/>
         <br/>
-        <span id="hostName1">hostName</span>
+        <span id="hostNamePlaceholder">hostName</div>
     </article>
     
-         <script>            
-        var txt1 = document.getElementById("recipientName");
-        var txt2 = document.getElementById("organizationName");
-        var txt3 = document.getElementById("eventDate");
-        var txt4 = document.getElementById("websiteURL");
-        var txt5 = document.getElementById("hostName");
+  <script>            
+    function replaceContent() {
+    let myRecipientName;
+    let myOrganizationName;
+    let myEventDate;
+    let mywebsiteURL;
+    let myHostName;
+    
+    myRecipientName = document.getElementById("recipientNameInput").value;
+    myOrganizationName = document.getElementById("organizationNameInput").value;
+    myEventDate = document.getElementById("eventDateInput").value;
+    mywebsiteURL = document.getElementById("websiteURLInput").value;
+    
+    console.log('Variable myRecipientName: ' + myRecipientName);
+    console.log('Variable myOrganizationName: ' + myOrganizationName);
+    console.log('Variable myEventDate: ' + myEventDate);
+    console.log('Variable mywebsiteURL: ' + mywebsiteURL);
+    console.log('Variable myHostName: ' + myHostName);
+    
+    document.getElementById("recipientNamePlaceholder").innerHTML = myRecipientName;
+    document.getElementById("organizationNamePlaceholder").innerHTML = myOrganizationName;
+    document.getElementById("eventDatePlaceholder").innerHTML = myEventDate;
+    document.getElementById("websiteURLPlaceholder").innerHTML = mywebsiteURL;
+    document.getElementById("hostNamePlaceholder").innerHTML = myHostName;
+}
 
-        var out1 = document.getElementById("recipientName1");
-        var out2 = document.getElementById("organizationName1");
-        var out3 = document.getElementById("eventDate1");
-        var out4 = document.getElementById("websiteURL1");
-        var out5 = document.getElementById("hostName1");
-        var btn = document.getElementById("btn");
-        
-         function fill() {
-            out1.innerHTML = txt1.value;
-            out2.innerHTML = txt2.value;
-            out3.innerHTML = txt3.value;
-            out4.innerHTML = txt4.value;
-            out5.innerHTML = txt5.value;
-         }    
-       btn.addEventListener('click', fill);   
-    </script>
+function writeDataToSection(e) {
+    var number=document.getElementsByName("numberOfVolunteers")[0].value;
+    for(let i=0;i<number;i++) {
+      document.getElementById("pageForm").innerHTML += "<form presskey=\"return readData()\"><label for=\"recipientName\">Recipient name:</label><input type=\"text\" name=\"recipientNameInput\" id=\"recipientNameInput\" placeholder=\"Enter your Recipient Name\" ><label for=\"organizationName\">Organization name:</label><input type=\"text\" name=\"organizationNameInput\" id=\"organizationNameInput\" placeholder=\"Enter the Organization Name\" ><label for=\"eventDate\">Event DAte:</label><input type=\"text\" name=\"eventDateInput\" id=\"eventDateInput\" placeholder=\"Enter the Event Date\" ><label for=\"websiteURL\">Website URL:</label><input type=\"text\" name=\"websiteURLInput\" id=\"websiteURLInput\" placeholder=\"Enter the Website URL\" ><label for=\"hostName\">Host name:</label><input type=\"text\" name=\"hostNameInput\" id=\"hostNameInput\" placeholder=\"Enter your Name\"></form>; 
+    }
+}
+function readData() {
+    var recipientName = document.getElementsByName("recipientName")[0].value;
+    var organizationName = document.getElementsByName("organizationName")[0].value;
+    var eventDate = document.getElementsByName("eventDate")[0].value;
+    var websiteURL = document.getElementsByName("websiteURL")[0].value;
+    var hostName = document.getElementsByName("hostName")[0].value;
+    
+    if(recipientName.trim() == "" ||organizationName.trim() == "" ||eventDate.trim() == "" ||wesiteURL.trim() == "" ||hostNAme.trim() == "") {
+        alert("Please fill the data."):
+    } else {
+        document.getElementById("recipientName").innerText = recipientName;
+        document.getElementById("organizationName").innerText = organizationName;
+        document.getElementById("eventDate").innerText = eventDate;
+        document.getElementById("websiteURL").innerText = websiteURL;
+        document.getElementById("hostName").innerText = hostName;
+    }
+    function displayBack() {
+        var html="";
+        for(var i=0;i<records.length;i++) {
+            var rec = records[i];
+            html+="Hello <span id=\"recipientName\">"+rec.name+"</div>!<br/><br/> ";
+            html+="You have been invited to volunteer for an event held by <span id=\"organizationName\">"rec.orgn+"</div> on <span id=\"eventDate\">'+rec.evnt+'</div>.";
+            html+= "Please come to the following website: <span id=\"websiteURL\">"+rec.url+"</div> to sign up as a volunteer. ";
+            html+= "<br/><br/> Thanks! ";
+            html+= "<br/> <br/> <span id=\"hostName\">"+rec.host+"</div>";
+            html+="<br><br>================================<br><br>"
+        }
+    document.getElementById("invite_form").innerHTML=" ";
+    document.getElementById("placeholderContent").innerHTML=html:
+    }
+    return false;
+}
+</script>
     
     <footer>This events site is for IT-FP3215 tasks.
     </footer>
