@@ -124,7 +124,7 @@ footer {
     left: 0;
     padding: 1rem;
     background-color: #efefef;
-    text-align: center;
+    text-align: center
 }
 div.gallery {
     margin: 5px;
@@ -151,165 +151,104 @@ div.desc {
 </head>
 
 <body>
-    <header>
-        <div class="top">
-            <a class="logo" href="index.html">CapellaVolunteers<span class="dotcom">.org</span></a>
-        </div>
-        <nav>
-            <ul class="topnav">
-                <li><a href="index.html">Home</a>
-                </li>
-                <li><a href="invitation.html" class="active">Invitation</a>
-                </li>
-                <li><a href="gallery.html">Gallery</a>
-                </li>
-                <li><a href="registration.html">Registration</a>
-                </li>
-            </ul>
-
-        </nav>
-    </header>
+ <header>
+    <div class="top">
+    <a class="logo" href="index.html">CapellaVolunteers<span class="dotcom">.org</div></a></div>
+     <nav>
+    <ul class="topnav">
+        <li><a href="index.html">Home</a>
+        </li>
+        <li><a href="invitation.html" class="active">Invitation</a>
+        </li>
+        <li><a href="gallery.html">Gallery</a>
+        </li>
+        <li><a href="registration.html">Registration</a>
+        </li>
+     </ul>
+     </nav>
+</header>
     <section id="pageForm">
-
-<!-- when the users select submit, the form will run the function to replace the values in the placeholder content and stop form refresh -->
-
-        <form action="#">
-
-<!-- aded numeric input field for the number of volunteers -->
-            <label for="numericVolunteers">Number of Volunteers:
-            </label>
-            <br>
-
-            <input type="text" id="nVolunteers" onkeydown="newFields()" name="numericVolunteers" placeholder="Number of Volunteers"/>
-            <br>
-
-<!-- div that will allow volunteers to input their names -->
-            
-            <div id="countFields"></div>
-            
-<!-- adding unique name id's to the input tags in order call the element -->
-
-            <label for="organizationName">Organization name:
-            </label>           
-            <input type="text" id="oName" name="organizationName" placeholder="Enter your Organization Name" />
-
-            <label for="eventDate">Event Date:
-            </label>
-            <input type="text" id="date" name="eventDate" placeholder="Enter your Event Date" />
-
-            <label for="websiteURL">URL:
-            </label>
-            <input type="text" name="websiteURL" id="wURL" placeholder="Enter your Website URL" />
-
-            <label for="hostName">Host name:
-            </label>
-            <input type="text" id="hName" name="hostName" placeholder="Host Name" />
-            <br>
-
-<!-- when the users select submit, the form will run the function to replace the values in the placeholder -->
-
-            <input style="width: 100%;
-            background-color: #800D1E;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;" type="button" value="Submit">
-        </form>
-
-
-<!-- added div to output each recipient invitation  -->
-
-    <div id="invitationMessage"></div>
-
+    <form action="#">
+        <h2>Enter Event Information Below:</h2>
+        <label for="organizationName">Organization name:</label>
+        <input type="text" name="organizationName" id="organizationInput" placeholder="Organization Name" required/>
+        <label for="eventDate">Event Date:</label>
+        <input type="text" name="eventDate" id="eventDateInput" placeholder="Event Date" required/>
+        <label for="websiteURL">URL:</label>
+        <input type="text" name="websiteURL" id="websiteURLInput" placeholder="Website URL" required/>
+        <label for="hostName">Host name:</label>
+        <input type="text" name="hostName" id="hostInput" placeholder="Host Name" required/>
+        <label for="recipientNumber">Number of Recipients:</label>
+        <input type="'text" name="recipientNumber" id="recipientNumber" onkeypress="pressEnter(event)" placeholder="enter number" required/><p>Press Enter</p>
+        <div id="container"></div><!--Container<div>where dynamic content will be placed-->
+        <!Tells the browser to call the inviteLetter function when the submit is clicked>
+        <input type="button" id="submit" value="Submit" onclick="inviteLetter()">
+    </form>
     </section>
+    <article id="Volunteer Information"></article>
 <script>
-    // declaring the variable names to be called in the functions
-var rName,
-  oName,
-  wURL,
-  hName,
-  date,
-  volunteers,
-  vCount,
-  nMessage,
-  vId,
-  indexImages,
-  bannerImg,
-  pause,
-  imgs,
-  characterFormat,
-  nameFormat,
-  phoneNumberFormat,
-  passwordVerify,
-  username,
-  password,
-  firstName,
-  lastName,
-  emailAddress,
-  phoneNumber, 
-  newsletterSignUp;
-
-// function that will create the invitation message for each volunteer
-function getInfo() {
-  vCount = document.getElementById("nVolunteers").value;
-  nMessage = "";
-  for (i = 1; i <= vCount; i++) {
-    vId = "vForm" + i;
-
-    // getting the input value name that matches the id field
-    rName = document.getElementById("vId").value;
-    oName = document.getElementById("oName").value;
-    date = document.getElementById("date").value;
-    wURL = document.getElementById("wURL").value;
-    hName = document.getElementById("hName").value;
-
-    nMessage +=
-      "<article id='placeholderContent'>Hello <span id='recipientName'>" +
-      rName +
-      "</span>!<br/><br/>You have been invited to volunteer for an event held by <span id='organizationName'>" +
-      oName +
-      "</span> on <span id='eventDate'>" +
-      date +
-      "</span>. Please come to the following website: <span id='websiteURL'>" +
-      wURL +
-      "</span> to sign up as a volunteer.<br/><br/> Thanks!<br/><span id='hostName'>" +
-      hName +
-      "</span><br/><br/></article>";
-  }
-  document.getElementById("invitationMessage").style.visibility = "visible";
-  document.getElementById("invitationMessage").innerHTML = nMessage;
-
-  return false;
-}
-
-// function that will register the enter key and create the numeric number entered for volunter name input field
-function newFields() {
-  vCount = document.getElementById("nVolunteers").value;
-  if (event.keyCode === 13) {
-    nMessage = "";
-    for (i = 1; i <= vCount; i++) {
-      nMessage +=
-        "<label for='vForm'>Recipient name " +
-        "" +
-        i +
-        ":</label> <input type='text' name='vForm' id='vForm" +
-        i +
-        "'placeholder='Enter your Recipient Name'/><br>";
+    var volAmount;
+function pressEnter(e){//e is event object passed from function call
+   var keyCode //key code will be stored in variable
+    if(e &&e.which) { //if which property of event object is supported (NN4)
+        e = e
+        keyCode = e.which //key code is contained in NN4's which property
     }
-    document.getElementById("countFields").innerHTML = nMessage;
-  }
+    else{
+        e = event
+       keyCode = e.keyCode //key code is contained in IE's keyCode property
+    }
+    if(keyCode == 13) { //if generated key code is equal to ascii 13 (if enter key)
+        addFields(); //submit the form
+        return false //prevents submission of the form if a field is empty.
+    }
+    else{
+        return true //The "else" tells the function what to do if all fields are filled out then the form can be submitted correctly
+    }
 }
 
-btn.addEventListener('click', getInfo);   
-</script>
-
-    <footer>This events site is for IT-FP3215 tasks.
-    </footer>
-
-
+function addFields() {
+    //number of inputs to create
+    var number = document.getElementById("recipientNumber").value;
+    
+    //Container <div> where dynamic content will be placed
+    document.getElementById("container").innerHTML = "";
+    
+    for (i=0;i<number;i++) {
+        var volunteerForm = document.createElement("label");
+        volunteerForm.type = "label";
+        volunteerForm.innerHTML = "Volunteer Name";
+            //create an <input> element, set its type and name attributes
+        var volunteerInput = document.createElement("input");
+        volunteerInput.type = "text";
+        volunteerInput.id = "recipientInput"+i;
+        volunteerInput.placeholder = "Enter Volunteer Name";
+        container.appendChild(volunteerForm);
+            //Attach/append a line break
+        container.appendChild(document.createElement("br"));
+        container.appendChild(volunteerInput);
+            //attach/append a line break
+        container.appendChild(document.createElement("br"));
+    }
+    recNumber=document.getElementById("recipientNumber").value;
+    document.getElementById("submit").style.visibility="visible";
+}
+    
+//the function 'inviteLetter' is defined//
+function inviteLetter() {
+    var orgName = document.getElementById("organizationInput").value;
+    var eDate = document.getElementById("eventDateInput").value;
+    var webURL = document.getElementById("websiteURLInput").value;
+    var hName = document.getElementById("hostInput").value;
+    for (i=0;i<recNumber; i++) {
+        var rName = [document.getElementById("recipientInput" +i).value, orgName, eDate, webURL, hName];
+        var volLetter =  document.createElement("label");
+        volLetter.innerHTML = "Hello "+rName[0]+"!<br/><br/>"+"You have been invited to volunteer for an even held by " +rName[1] + " on " + rName[2] +". Please come to the following website: " + rName[3] + " to sign up as a volunteer. Thanks!<br/><br/>" + rName[4]+"<br/><br/><hr/>";
+    document.getElementById("Volunteer Information").appendChild(volLetter);
+    }
+}  
+</script>    
+    
+    <footer>This events site is for IT-FP3215 tasks.</footer>
 </body>
-
-
 </html>
